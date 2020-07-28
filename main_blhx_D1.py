@@ -134,7 +134,7 @@ class leidian:
         result = cv2.matchTemplate(screenshot, templatetimg, methods[m])
         min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
         print(imagepath, max_val)
-        if max_val > 0.7:
+        if max_val > 0.68:
             center = (max_loc[0] + image_y / 2, max_loc[1] + image_x / 2)
             print(center[0], center[1])
             return center
@@ -178,44 +178,103 @@ class leidian:
         leidian.m_tap(self, cen[0], cen[1], name)
 
         # mImmediateStart.png
-        for i in range(2):
-            ipath = os.path.abspath('.') + '\mal_script\images\mImmediateStart.png'
-            cen = leidian.recognize(self, name, ipath, 15, '立即前往')
+        ipath = os.path.abspath('.') + '\mal_script\images\mImmediateStart.png'
+        cen = leidian.recognize(self, name, ipath, 15, '立即前往')
+        if not cen:
+            exit(1)
+        leidian.m_tap(self, cen[0], cen[1], name)
+
+        # mFleetselect.png
+        ipath = os.path.abspath('.') + '\mal_script\images\mImmediateStart.png'
+        cen = leidian.recognize(self, name, ipath, 15, '舰队选择')
+        if not cen:
+            exit(1)
+
+        # mImmediateStart.png
+        ipath = os.path.abspath('.') + '\mal_script\images\mImmediateStart.png'
+        cen = leidian.recognize(self, name, ipath, 15, '立即前往')
+        if not cen:
+            exit(1)
+        leidian.m_tap(self, cen[0], cen[1], name)
+
+        time.sleep(2)
+        # mCollate.png
+        ipath = os.path.abspath('.') + '\mal_script\images\mCollate.png'
+        cen = leidian.recognize(self, name, ipath, 5, '整理')
+        if cen:
+            leidian.m_tap(self, cen[0], cen[1], name)
+
+            # mRetire.png
+            ipath = os.path.abspath('.') + '\mal_script\images\mRetire.png'
+            cen = leidian.recognize(self, name, ipath, 15, '一键退役')
+            if not cen:
+                exit(1)
+            leidian.m_tap(self, cen[0], cen[1], name)
+
+            # mConfirm .png
+            ipath = os.path.abspath('.') + '\mal_script\images\mConfirm.png'
+            cen = leidian.recognize(self, name, ipath, 15, '确定')
+            if not cen:
+                exit(1)
+            leidian.m_tap(self, cen[0], cen[1], name)
+
+            # mGetitems.png
+            ipath = os.path.abspath('.') + '\mal_script\images\mGetitems.png'
+            cen = leidian.recognize(self, name, ipath, 15, '获得道具')
+            if not cen:
+                exit(1)
+            leidian.m_tap(self, cen[0], cen[1], name)
+
+            # mConfirm .png
+            ipath = os.path.abspath('.') + '\mal_script\images\mConfirm.png'
+            cen = leidian.recognize(self, name, ipath, 15, '确定')
+            if not cen:
+                exit(1)
+            leidian.m_tap(self, cen[0], cen[1], name)
+
+            # mConfirm .png
+            ipath = os.path.abspath('.') + '\mal_script\images\mConfirm.png'
+            cen = leidian.recognize(self, name, ipath, 15, '确定')
+            if not cen:
+                exit(1)
+            leidian.m_tap(self, cen[0], cen[1], name)
+
+            # mGetitems.png
+            ipath = os.path.abspath('.') + '\mal_script\images\mGetitems.png'
+            cen = leidian.recognize(self, name, ipath, 15, '获得道具')
+            if not cen:
+                exit(1)
+            leidian.m_tap(self, cen[0], cen[1], name)
+
+            # mCancel.png
+            ipath = os.path.abspath('.') + '\mal_script\images\mCancel.png'
+            cen = leidian.recognize(self, name, ipath, 15, '取消')
+            if not cen:
+                exit(1)
+            leidian.m_tap(self, cen[0], cen[1], name)
+
+            # mOffensive.png
+            ipath = os.path.abspath('.') + '\mal_script\images\mOffensive.png'
+            cen = leidian.recognize(self, name, ipath, 15, '迎击')
             if not cen:
                 exit(1)
             leidian.m_tap(self, cen[0], cen[1], name)
 
         # mElite * 2
         for i in range(2):
-            cen1 = False
-            cen2 = False
-            cen3 = False
-            for j in range(5):
-                # mElite1.png
-                ipath1 = os.path.abspath('.') + '\mal_script\images\mElite1.png'
-                cen1 = leidian.recognize(self, name, ipath1, 1, '精英1')
-
-                # mElite2.png
-                ipath2 = os.path.abspath('.') + '\mal_script\images\mElite2.png'
-                cen2 = leidian.recognize(self, name, ipath2, 1, '精英2')
-
-                # mElite3.png
-                ipath3 = os.path.abspath('.') + '\mal_script\images\mElite3.png'
-                cen3 = leidian.recognize(self, name, ipath3, 1, '精英3')
-
-            if cen1:
-                leidian.m_tap(self, cen1[0], cen1[1], name)
-            elif cen2:
-                leidian.m_tap(self, cen2[0], cen2[1], name)
-            elif cen3:
-                leidian.m_tap(self, cen3[0], cen3[1], name)
-            else:
+            # mElite.png
+            ipath = os.path.abspath('.') + '\mal_script\images\mElite.png'
+            cen = leidian.recognize(self, name, ipath, 15, '精英地板')
+            if not cen:
                 print('---------------------------fail to recognize elite enemy: %s' % i)
                 exit(1)
+            leidian.m_tap(self, cen[0], cen[1], name)
+            leidian.m_tap(self, cen[0], cen[1], name)
 
+            time.sleep(2)
             # mCollate.png
             ipath = os.path.abspath('.') + '\mal_script\images\mCollate.png'
-            cen = leidian.recognize(self, name, ipath, 15, '整理')
+            cen = leidian.recognize(self, name, ipath, 5, '整理')
             if cen:
                 leidian.m_tap(self, cen[0], cen[1], name)
 
@@ -301,23 +360,21 @@ class leidian:
                 exit(1)
             leidian.m_tap(self, cen[0], cen[1], name)
 
+            time.sleep(5)
+
         # enemy * 3
         for i in range(3):
-            cen1 = False
-            cen2 = False
-            cen3 = False
-            for j in range(5):
-                # mEnemy1.png
-                ipath1 = os.path.abspath('.') + '\mal_script\images\mEnemy1.png'
-                cen1 = leidian.recognize(self, name, ipath1, 1, '敌人1')
+            # mEnemy1.png
+            ipath1 = os.path.abspath('.') + '\mal_script\images\mEnemy1.png'
+            cen1 = leidian.recognize(self, name, ipath1, 15, '敌人1')
 
-                # mEnemy2.png
-                ipath2 = os.path.abspath('.') + '\mal_script\images\mEnemy2.png'
-                cen2 = leidian.recognize(self, name, ipath2, 1, '敌人2')
+            # mEnemy2.png
+            ipath2 = os.path.abspath('.') + '\mal_script\images\mEnemy2.png'
+            cen2 = leidian.recognize(self, name, ipath2, 15, '敌人2')
 
-                # mEnemy3.png
-                ipath3 = os.path.abspath('.') + '\mal_script\images\mEnemy3.png'
-                cen3 = leidian.recognize(self, name, ipath3, 1, '敌人3')
+            # mEnemy3.png
+            ipath3 = os.path.abspath('.') + '\mal_script\images\mEnemy3.png'
+            cen3 = leidian.recognize(self, name, ipath3, 15, '敌人3')
 
             if cen1:
                 leidian.m_tap(self, cen1[0], cen1[1], name)
@@ -329,9 +386,10 @@ class leidian:
                 print('---------------------------fail to recognize enemy: %s' % i)
                 exit(1)
 
+            time.sleep(2)
             # mCollate.png
             ipath = os.path.abspath('.') + '\mal_script\images\mCollate.png'
-            cen = leidian.recognize(self, name, ipath, 15, '整理')
+            cen = leidian.recognize(self, name, ipath, 5, '整理')
             if cen:
                 leidian.m_tap(self, cen[0], cen[1], name)
 
@@ -438,9 +496,10 @@ class leidian:
             exit(1)
         leidian.m_tap(self, cen[0], cen[1], name)
 
+        time.sleep(2)
         # mCollate.png
         ipath = os.path.abspath('.') + '\mal_script\images\mCollate.png'
-        cen = leidian.recognize(self, name, ipath, 15, '整理')
+        cen = leidian.recognize(self, name, ipath, 5, '整理')
         if cen:
             leidian.m_tap(self, cen[0], cen[1], name)
 
