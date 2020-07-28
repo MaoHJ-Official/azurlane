@@ -134,7 +134,7 @@ class leidian:
         result = cv2.matchTemplate(screenshot, templatetimg, methods[m])
         min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
         print(imagepath, max_val)
-        if max_val > 0.68:
+        if max_val > 0.7:
             center = (max_loc[0] + image_y / 2, max_loc[1] + image_x / 2)
             print(center[0], center[1])
             return center
@@ -184,20 +184,6 @@ class leidian:
             exit(1)
         leidian.m_tap(self, cen[0], cen[1], name)
 
-        # mFleetselect.png
-        ipath = os.path.abspath('.') + '\mal_script\images\mImmediateStart.png'
-        cen = leidian.recognize(self, name, ipath, 15, '舰队选择')
-        if not cen:
-            exit(1)
-
-        # mImmediateStart.png
-        ipath = os.path.abspath('.') + '\mal_script\images\mImmediateStart.png'
-        cen = leidian.recognize(self, name, ipath, 15, '立即前往')
-        if not cen:
-            exit(1)
-        leidian.m_tap(self, cen[0], cen[1], name)
-
-        time.sleep(2)
         # mCollate.png
         ipath = os.path.abspath('.') + '\mal_script\images\mCollate.png'
         cen = leidian.recognize(self, name, ipath, 5, '整理')
@@ -210,6 +196,12 @@ class leidian:
             if not cen:
                 exit(1)
             leidian.m_tap(self, cen[0], cen[1], name)
+
+            # mInform.png
+            ipath = os.path.abspath('.') + '\mal_script\images\mInform.png'
+            cen = leidian.recognize(self, name, ipath, 15, '信息')
+            if not cen:
+                exit(1)
 
             # mConfirm .png
             ipath = os.path.abspath('.') + '\mal_script\images\mConfirm.png'
@@ -225,12 +217,24 @@ class leidian:
                 exit(1)
             leidian.m_tap(self, cen[0], cen[1], name)
 
+            # mInform.png
+            ipath = os.path.abspath('.') + '\mal_script\images\mInform.png'
+            cen = leidian.recognize(self, name, ipath, 15, '信息')
+            if not cen:
+                exit(1)
+
             # mConfirm .png
             ipath = os.path.abspath('.') + '\mal_script\images\mConfirm.png'
             cen = leidian.recognize(self, name, ipath, 15, '确定')
             if not cen:
                 exit(1)
             leidian.m_tap(self, cen[0], cen[1], name)
+
+            # mMaterials.png
+            ipath = os.path.abspath('.') + '\mal_script\images\mMaterials.png'
+            cen = leidian.recognize(self, name, ipath, 15, '材料')
+            if not cen:
+                exit(1)
 
             # mConfirm .png
             ipath = os.path.abspath('.') + '\mal_script\images\mConfirm.png'
@@ -253,12 +257,32 @@ class leidian:
                 exit(1)
             leidian.m_tap(self, cen[0], cen[1], name)
 
-            # mOffensive.png
-            ipath = os.path.abspath('.') + '\mal_script\images\mOffensive.png'
-            cen = leidian.recognize(self, name, ipath, 15, '迎击')
+            # mD1.png
+            ipath = os.path.abspath('.') + '\mal_script\images\mD1.png'
+            cen = leidian.recognize(self, name, ipath, 15, 'D1')
             if not cen:
                 exit(1)
             leidian.m_tap(self, cen[0], cen[1], name)
+
+            # mImmediateStart.png
+            ipath = os.path.abspath('.') + '\mal_script\images\mImmediateStart.png'
+            cen = leidian.recognize(self, name, ipath, 15, '立即前往')
+            if not cen:
+                exit(1)
+            leidian.m_tap(self, cen[0], cen[1], name)
+
+        # mFleetselect.png
+        ipath = os.path.abspath('.') + '\mal_script\images\mImmediateStart.png'
+        cen = leidian.recognize(self, name, ipath, 15, '舰队选择')
+        if not cen:
+            exit(1)
+
+        # mImmediateStart.png
+        ipath = os.path.abspath('.') + '\mal_script\images\mImmediateStart.png'
+        cen = leidian.recognize(self, name, ipath, 15, '立即前往')
+        if not cen:
+            exit(1)
+        leidian.m_tap(self, cen[0], cen[1], name)
 
         # mElite * 2
         for i in range(2):
@@ -285,7 +309,13 @@ class leidian:
                     exit(1)
                 leidian.m_tap(self, cen[0], cen[1], name)
 
-                # mConfirm .png
+                # mInform.png
+                ipath = os.path.abspath('.') + '\mal_script\images\mInform.png'
+                cen = leidian.recognize(self, name, ipath, 15, '信息')
+                if not cen:
+                    exit(1)
+
+                # mConfirm.png
                 ipath = os.path.abspath('.') + '\mal_script\images\mConfirm.png'
                 cen = leidian.recognize(self, name, ipath, 15, '确定')
                 if not cen:
@@ -299,14 +329,26 @@ class leidian:
                     exit(1)
                 leidian.m_tap(self, cen[0], cen[1], name)
 
-                # mConfirm .png
+                # mInform.png
+                ipath = os.path.abspath('.') + '\mal_script\images\mInform.png'
+                cen = leidian.recognize(self, name, ipath, 15, '信息')
+                if not cen:
+                    exit(1)
+
+                # mConfirm.png
                 ipath = os.path.abspath('.') + '\mal_script\images\mConfirm.png'
                 cen = leidian.recognize(self, name, ipath, 15, '确定')
                 if not cen:
                     exit(1)
                 leidian.m_tap(self, cen[0], cen[1], name)
 
-                # mConfirm .png
+                # mMaterials.png
+                ipath = os.path.abspath('.') + '\mal_script\images\mMaterials.png'
+                cen = leidian.recognize(self, name, ipath, 15, '材料')
+                if not cen:
+                    exit(1)
+
+                # mConfirm.png
                 ipath = os.path.abspath('.') + '\mal_script\images\mConfirm.png'
                 cen = leidian.recognize(self, name, ipath, 15, '确定')
                 if not cen:
@@ -400,6 +442,12 @@ class leidian:
                     exit(1)
                 leidian.m_tap(self, cen[0], cen[1], name)
 
+                # mInform.png
+                ipath = os.path.abspath('.') + '\mal_script\images\mInform.png'
+                cen = leidian.recognize(self, name, ipath, 15, '信息')
+                if not cen:
+                    exit(1)
+
                 # mConfirm .png
                 ipath = os.path.abspath('.') + '\mal_script\images\mConfirm.png'
                 cen = leidian.recognize(self, name, ipath, 15, '确定')
@@ -414,12 +462,24 @@ class leidian:
                     exit(1)
                 leidian.m_tap(self, cen[0], cen[1], name)
 
+                # mInform.png
+                ipath = os.path.abspath('.') + '\mal_script\images\mInform.png'
+                cen = leidian.recognize(self, name, ipath, 15, '信息')
+                if not cen:
+                    exit(1)
+
                 # mConfirm .png
                 ipath = os.path.abspath('.') + '\mal_script\images\mConfirm.png'
                 cen = leidian.recognize(self, name, ipath, 15, '确定')
                 if not cen:
                     exit(1)
                 leidian.m_tap(self, cen[0], cen[1], name)
+
+                # mMaterials.png
+                ipath = os.path.abspath('.') + '\mal_script\images\mMaterials.png'
+                cen = leidian.recognize(self, name, ipath, 15, '材料')
+                if not cen:
+                    exit(1)
 
                 # mConfirm .png
                 ipath = os.path.abspath('.') + '\mal_script\images\mConfirm.png'
@@ -510,6 +570,12 @@ class leidian:
                 exit(1)
             leidian.m_tap(self, cen[0], cen[1], name)
 
+            # mInform.png
+            ipath = os.path.abspath('.') + '\mal_script\images\mInform.png'
+            cen = leidian.recognize(self, name, ipath, 15, '信息')
+            if not cen:
+                exit(1)
+
             # mConfirm .png
             ipath = os.path.abspath('.') + '\mal_script\images\mConfirm.png'
             cen = leidian.recognize(self, name, ipath, 15, '确定')
@@ -524,12 +590,24 @@ class leidian:
                 exit(1)
             leidian.m_tap(self, cen[0], cen[1], name)
 
+            # mInform.png
+            ipath = os.path.abspath('.') + '\mal_script\images\mInform.png'
+            cen = leidian.recognize(self, name, ipath, 15, '信息')
+            if not cen:
+                exit(1)
+
             # mConfirm .png
             ipath = os.path.abspath('.') + '\mal_script\images\mConfirm.png'
             cen = leidian.recognize(self, name, ipath, 15, '确定')
             if not cen:
                 exit(1)
             leidian.m_tap(self, cen[0], cen[1], name)
+
+            # mMaterials.png
+            ipath = os.path.abspath('.') + '\mal_script\images\mMaterials.png'
+            cen = leidian.recognize(self, name, ipath, 15, '材料')
+            if not cen:
+                exit(1)
 
             # mConfirm .png
             ipath = os.path.abspath('.') + '\mal_script\images\mConfirm.png'
@@ -593,4 +671,8 @@ if __name__ == '__main__':
     ld.getSerialNo()
 
     while True:
+        t_start = time.process_time()
         ld.autoD1(ld.nameList[0])
+        t_end = time.process_time()
+        t_process = t_end - t_start
+        print('---------------------------一次D1用时: %s' % t_process)
