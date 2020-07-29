@@ -533,6 +533,7 @@ class leidian:
                 exit(1)
             leidian.m_tap(self, cen[0], cen[1], name)
 
+        time.sleep(5)
         # mSwitchover.png
         ipath = os.path.abspath('.') + '\mal_script\images\mSwitchover.png'
         cen = leidian.recognize(self, name, ipath, 15, '切换')
