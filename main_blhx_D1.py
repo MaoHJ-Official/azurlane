@@ -20,7 +20,7 @@ class leidian:
         try:
             os.system(cmd)
         except:
-            print('connect %s fail' % name)
+            print('---------------------------connect %s fail' % name)
             exit(1)
 
     def m_tap(self, x, y, name):
@@ -31,13 +31,12 @@ class leidian:
         :param name:模拟器的serialNo
         :return:
         """
-        print(x, y)
         cmd = 'adb -s ' + name + ' shell input tap %s %s' % (x, y)
         try:
             os.system(cmd)
-            print('---------------------------%s %s 点击 ' % (time.time(), name))
+            print('---------------------------%.6f %s 点击 %s %s' % (time.time(), name, x, y))
         except:
-            print('click fail' + name)
+            print('---------------------------click fail' + name)
             exit(1)
         print(cmd)
 
@@ -52,13 +51,12 @@ class leidian:
         :param name:模拟器的serialNo
         :return:
         """
-        print(x1, y1, x2, y2)
         cmd = 'adb -s ' + name + ' shell input swipe %s %s %s %s %s' % (x1, y1, x2, y2, duration)
         try:
             os.system(cmd)
-            print('---------------------------%s %s 滑动 ' % (time.time(), name))
+            print('---------------------------%.6f %s 滑动 %s %s %s %s' % (time.time(), name, x1, y1, x2, y2))
         except:
-            print('swipe fail' + name)
+            print('---------------------------swipe fail' + name)
             exit(1)
         print(cmd)
 
@@ -69,13 +67,12 @@ class leidian:
         :param name:模拟器的serialNo
         :return:
         """
-        print(s)
         cmd = 'adb -s ' + name + ' shell input text %s' % s
         try:
             os.system(cmd)
             print('---------------------------%s %s 输入 %s ' % (time.time(), name, s))
         except:
-            print('text fail' + name)
+            print('---------------------------text fail' + name)
             exit(1)
         print(cmd)
 
@@ -89,13 +86,13 @@ class leidian:
         try:
             os.system('adb -s ' + name + ' shell screencap /data/' + name + 'screen.png')
         except:
-            print('%s screencap fail' % name)
+            print('---------------------------%s screencap fail' % name)
             exit(1)
 
         try:
             os.system('adb -s ' + name + ' pull /data/' + name + 'screen.png %s' % path)
         except:
-            print('%s pull screencap fail' % name)
+            print('---------------------------%s pull screencap fail' % name)
             exit(1)
 
     def getSerialNo(self):
@@ -107,7 +104,7 @@ class leidian:
         try:
             os.system(cmd)
         except:
-            print('get serial number fail')
+            print('---------------------------get serial number fail')
             exit(1)
         r = os.popen(cmd)
         r.readline()
@@ -150,22 +147,22 @@ class leidian:
         :param templatename: 模板图像名称，用于输出
         :return: cen
         """
-        print('---------------------------%s %s 开始识别 %s ' % (time.time(), name, templatename))
+        print('---------------------------%.6f %s 开始识别 %s ' % (time.time(), name, templatename))
         cen = False
         ts = 0
         while (not cen):
-            print('---------------------------%s %s 循环识别 %s ' % (time.time(), name, templatename))
+            print('---------------------------%.6f %s 循环识别 %s ' % (time.time(), name, templatename))
             ts += 1
             if (ts == t):
-                print(name + ' fail to recognize :' + templatename)
+                print('---------------------------' + name + ' fail to recognize :' + templatename)
                 break
             cen = leidian.image2position(self, name, ipath)
-        print('---------------------------%s %s 识别结束 %s ' % (time.time(), name, templatename))
+        print('---------------------------%6f %s 识别结束 %s ' % (time.time(), name, templatename))
         return cen
 
     def autoD1(self, name):
         if name == '':
-            print('emulator name error')
+            print('---------------------------emulator name error')
             exit(1)
 
         print('---------------------------开始一次D1')
@@ -287,9 +284,11 @@ class leidian:
         # elite * 2
         elitePosition = [[740, 635], [927, 700], [745.5, 846]]
         for i in range(3):
+            print('---------------------------wait 10s for refresh')
             time.sleep(10)
             leidian.m_tap(self, elitePosition[i][0], elitePosition[i][1], name)
 
+            print('---------------------------wait 2s for moving')
             time.sleep(2)  # 移动时长
             # mCollate.png
             ipath = os.path.abspath('.') + '\mal_script\images\mCollate.png'
@@ -375,6 +374,7 @@ class leidian:
             ipath = os.path.abspath('.') + '\mal_script\images\mOffensive.png'
             cen = leidian.recognize(self, name, ipath, 5, '迎击')
             if not cen:
+                print('---------------------------wait 60s for weigh anchor')
                 time.sleep(60)  # 战斗时长
 
                 # mContinue.png
@@ -391,7 +391,7 @@ class leidian:
                     exit(1)
                 leidian.m_tap(self, cen[0], cen[1], name)
 
-                for j in range(8):
+                for j in range(4):
                     leidian.m_tap(self, 1000, 250, name)  # 获得紫金
 
                 # mConfirm_gold.png
@@ -403,7 +403,8 @@ class leidian:
 
         # enemy * 3
         for i in range(3):
-            time.sleep(5)
+            print('---------------------------wait 10s for a refresh')
+            time.sleep(10)
             # mEnemy1.png
             ipath1 = os.path.abspath('.') + '\mal_script\images\mEnemy1.png'
             cen1 = leidian.recognize(self, name, ipath1, 5, '敌舰1：主力舰队')
@@ -426,6 +427,7 @@ class leidian:
                 print('---------------------------fail to recognize enemy: %s' % i)
                 exit(1)
 
+            print('---------------------------wait 2s for moving')
             time.sleep(2)  # 移动时长
             # mCollate.png
             ipath = os.path.abspath('.') + '\mal_script\images\mCollate.png'
@@ -507,6 +509,7 @@ class leidian:
                     exit(1)
                 leidian.m_tap(self, cen[0], cen[1], name)
 
+            print('---------------------------wait 60s for weigh anchor')
             time.sleep(60)  # 战斗时长
 
             # mContinue.png
@@ -523,7 +526,7 @@ class leidian:
                 exit(1)
             leidian.m_tap(self, cen[0], cen[1], name)
 
-            for j in range(8):
+            for j in range(4):
                 leidian.m_tap(self, 1000, 250, name)  # 获得紫金
 
             # mConfirm_gold.png
@@ -533,6 +536,7 @@ class leidian:
                 exit(1)
             leidian.m_tap(self, cen[0], cen[1], name)
 
+        print('---------------------------wait 5s for refresh')
         time.sleep(5)
         # mSwitchover.png
         ipath = os.path.abspath('.') + '\mal_script\images\mSwitchover.png'
@@ -546,16 +550,27 @@ class leidian:
         cen = leidian.recognize(self, name, ipath, 15, '黎塞留')
         if not cen:
             exit(1)
+
         leidian.m_swipe(self, 1000, 250, 500, 250, 2000, name)  # 2000ms = 2s
 
-        # mBoss.png
-        ipath = os.path.abspath('.') + '\mal_script\images\mBoss.png'
-        cen = leidian.recognize(self, name, ipath, 15, 'Boss')
+        # mStone.png
+        ipath = os.path.abspath('.') + '\mal_script\images\mStone.png'
+        cen = leidian.recognize(self, name, ipath, 15, '石头')
         if not cen:
             exit(1)
-        leidian.m_tap(self, cen[0], cen[1], name)
 
+        bossPositon = [[605, cen[1]], [800, cen[1]]]
+
+        print('---------------------------wait 2s for refresh')
         time.sleep(2)
+        leidian.m_tap(self, bossPositon[0][0], bossPositon[0][1], name)
+
+        print('---------------------------wait 10s for moving')
+        time.sleep(10)
+        leidian.m_tap(self, bossPositon[1][0], bossPositon[1][1], name)
+
+        print('---------------------------wait 10s for moving')
+        time.sleep(10)
         # mCollate.png
         ipath = os.path.abspath('.') + '\mal_script\images\mCollate.png'
         cen = leidian.recognize(self, name, ipath, 5, '整理')
@@ -636,6 +651,7 @@ class leidian:
                 exit(1)
             leidian.m_tap(self, cen[0], cen[1], name)
 
+        print('---------------------------wait 120s for weigh anchor')
         time.sleep(120)  # 战斗时长
 
         # mContinue.png
@@ -652,7 +668,7 @@ class leidian:
             exit(1)
         leidian.m_tap(self, cen[0], cen[1], name)
 
-        for j in range(8):
+        for j in range(4):
             leidian.m_tap(self, 1000, 250, name)  # 获得紫金
 
         # mConfirm_gold.png
