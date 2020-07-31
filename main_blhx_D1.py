@@ -34,7 +34,8 @@ class leidian:
         cmd = 'adb -s ' + name + ' shell input tap %s %s' % (x, y)
         try:
             os.system(cmd)
-            print('---------------------------%.6f %s 点击 %s %s' % (time.time(), name, x, y))
+            print('---------------------------' + time.strftime("%Y-%m-%d %H:%M:%S",
+                                                                time.localtime()) + ' %s 点击 %s %s' % (name, x, y))
         except:
             print('---------------------------click fail' + name)
             exit(1)
@@ -54,7 +55,9 @@ class leidian:
         cmd = 'adb -s ' + name + ' shell input swipe %s %s %s %s %s' % (x1, y1, x2, y2, duration)
         try:
             os.system(cmd)
-            print('---------------------------%.6f %s 滑动 %s %s %s %s' % (time.time(), name, x1, y1, x2, y2))
+            print('---------------------------' + time.strftime("%Y-%m-%d %H:%M:%S",
+                                                                time.localtime()) + ' %s 滑动 %s %s %s %s' % (
+                      name, x1, y1, x2, y2))
         except:
             print('---------------------------swipe fail' + name)
             exit(1)
@@ -70,7 +73,9 @@ class leidian:
         cmd = 'adb -s ' + name + ' shell input text %s' % s
         try:
             os.system(cmd)
-            print('---------------------------%s %s 输入 %s ' % (time.time(), name, s))
+            print(
+                '---------------------------' + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + ' %s 输入 %s ' % (
+                    name, s))
         except:
             print('---------------------------text fail' + name)
             exit(1)
@@ -147,17 +152,21 @@ class leidian:
         :param templatename: 模板图像名称，用于输出
         :return: cen
         """
-        print('---------------------------%.6f %s 开始识别 %s ' % (time.time(), name, templatename))
+        print('---------------------------' + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + ' %s 开始识别 %s ' % (
+            name, templatename))
         cen = False
         ts = 0
         while (not cen):
-            print('---------------------------%.6f %s 循环识别 %s ' % (time.time(), name, templatename))
+            print('---------------------------' + time.strftime("%Y-%m-%d %H:%M:%S",
+                                                                time.localtime()) + ' %s 循环识别 %s ' % (
+                      name, templatename))
             ts += 1
             if (ts == t):
                 print('---------------------------' + name + ' fail to recognize :' + templatename)
                 break
             cen = leidian.image2position(self, name, ipath)
-        print('---------------------------%6f %s 识别结束 %s ' % (time.time(), name, templatename))
+        print('---------------------------' + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + ' %s 识别结束 %s ' % (
+            name, templatename))
         return cen
 
     def autoD1(self, name):
