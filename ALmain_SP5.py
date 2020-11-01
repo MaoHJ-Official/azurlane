@@ -409,6 +409,9 @@ class leidian:
                         exit(1)
                     leidian.m_tap(self, cen[0], cen[1], name)
 
+                    print('---------------------------wait 10s for refresh')
+                    time.sleep(10)
+
                     # mConfirm .png
                     ipath = os.path.abspath('.') + '\mal_script\SP5\images\mConfirm.png'
                     cen = leidian.recognize(self, name, ipath, 5, '确定')
@@ -550,6 +553,9 @@ class leidian:
                 exit(1)
             leidian.m_tap(self, cen[0], cen[1], name)
 
+            print('---------------------------wait 10s for refresh')
+            time.sleep(10)
+
             # mConfirm .png
             ipath = os.path.abspath('.') + '\mal_script\SP5\images\mConfirm.png'
             cen = leidian.recognize(self, name, ipath, 5, '确定')
@@ -671,6 +677,9 @@ class leidian:
         if not cen:
             exit(1)
         leidian.m_tap(self, cen[0], cen[1], name)
+
+        print('---------------------------wait 10s for refresh')
+        time.sleep(10)
 
         # mConfirm .png
         ipath = os.path.abspath('.') + '\mal_script\SP5\images\mConfirm.png'
